@@ -1,5 +1,7 @@
-# mynodered
+# My Node-Red
 Node Red Docker Container to run Node-Red on x86/x64 (like Synology NAS or Intel Nuc)
+
+(This version replaces the obsolete version from here: https://github.com/arvdsar/mynodered)
 
 Initially created to run Node-Red on my Synology NAS (x86). Meanwhile I moved most of my docker containers to an Intel NUC.
 
