@@ -41,6 +41,7 @@ RUN npm install node-red-contrib-onvif
 RUN npm install node-red-contrib-samsung-tv-control
 RUN npm install node-red-contrib-bcrypt
 RUN npm install node-red-contrib-avr-yamaha
+RUN npm install node-red-contrib-nora
 
 
 
