@@ -44,6 +44,7 @@ npm install node-red-contrib-avr-yamaha &&\
 npm install node-red-contrib-nora &&\
 npm install node-red-contrib-image-tools &&\
 npm install node-red-contrib-whatsapp-cmb &&\
-npm install node-red-contrib-apple-find-me
+npm install node-red-contrib-apple-find-me &&\
+npm install node-red-contrib-web-worldmap
 
 
