@@ -1,6 +1,6 @@
 FROM nodered/node-red:latest-12
-RUN pip3 install --upgrade pip3 &&\
-pip3 install catt
+RUN apt-get -y install python3-pip
+RUN pip3 install catt
 RUN npm install node-red-contrib-blynk-ws &&\
 npm install node-red-node-geofence &&\
 npm install node-red-node-ping &&\
