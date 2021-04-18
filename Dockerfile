@@ -1,5 +1,5 @@
 FROM nodered/node-red:latest-12
-RUN pip install --upgrade pip &&\
+RUN pip3 install --upgrade pip3 &&\
 pip3 install catt
 RUN npm install node-red-contrib-blynk-ws &&\
 npm install node-red-node-geofence &&\
