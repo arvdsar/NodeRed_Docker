@@ -1,4 +1,5 @@
 FROM nodered/node-red:latest-12
+RUN pip3 install catt
 RUN npm install node-red-contrib-blynk-ws &&\
 npm install node-red-node-geofence &&\
 npm install node-red-node-ping &&\
