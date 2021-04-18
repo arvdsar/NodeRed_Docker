@@ -1,6 +1,8 @@
 FROM nodered/node-red:latest-12
 
-RUN sudo pip3 install catt
+RUN apk add --no-cache python3 py3-pip && \
+    pip3 install catt && \
+    rm -rf /root/.cache/pip
 RUN npm install node-red-contrib-blynk-ws &&\
 npm install node-red-node-geofence &&\
 npm install node-red-node-ping &&\
