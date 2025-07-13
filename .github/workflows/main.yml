@@ -1,0 +1,45 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: mrmadalex/noderedgittest
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    container:
+      image: nodered/node-red:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image with run number tag
+        run: docker build -t $REGISTRY:${{ github.run_number }} .
+
+      - name: Build Docker image with latest tag
+        run: docker build -t $REGISTRY:latest .
+
+      - name: Push Docker image with run number tag
+        run: docker push $REGISTRY:${{ github.run_number }}
+
+      - name: Push Docker image with latest tag
+        run: docker push $REGISTRY:latest
+
+      - name: Remove local images
+        run: |
+          docker rmi $REGISTRY:${{ github.run_number }} || true
+          docker rmi $REGISTRY:latest || true
