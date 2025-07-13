@@ -7,6 +7,8 @@ on:
 
 env:
   REGISTRY: mrmadalex/noderedgittest
+  BUILD_NUMBER_OFFSET: 51
+
 
 jobs:
   build-and-push:
@@ -24,6 +26,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Calculate build number
+        id: buildnum
+        run: echo "BUILD_NUMBER=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))" >> $GITHUB_ENV
 
       - name: Build Docker image with run number tag
         run: docker build -t $REGISTRY:${{ github.run_number }} .
