@@ -2,9 +2,14 @@ name: Build and Push Docker Images
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'NodeRed version number'
+        required: true
+        default: 'vx.x.x'
 
 env:
-  REGISTRY: mrmadalex/noderedgittest
+  REGISTRY: mrmadalex/my_new_nodered
   BUILD_NUMBER_OFFSET: 51
 
 
@@ -28,20 +33,23 @@ jobs:
       - name: Calculate build number
         id: buildnum
         run: echo "BUILD_NUMBER=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))" >> $GITHUB_ENV
+        
+      - name: Set combined tag
+        run: echo "COMBINED_TAG=${BUILD_NUMBER}-${{ github.event.inputs.version }}" >> $GITHUB_ENV
 
       - name: Build Docker image with run number tag
-        run: docker build -t $REGISTRY:${{ github.run_number }} .
+        run: docker build -t $REGISTRY:${{ COMBINED_TAG }} .
 
       - name: Build Docker image with latest tag
         run: docker build -t $REGISTRY:latest .
 
       - name: Push Docker image with run number tag
-        run: docker push $REGISTRY:${{ github.run_number }}
+        run: docker push $REGISTRY:${{ COMBINED_TAG }}
 
       - name: Push Docker image with latest tag
         run: docker push $REGISTRY:latest
 
       - name: Remove local images
         run: |
-          docker rmi $REGISTRY:${{ github.run_number }} || true
+          docker rmi $REGISTRY:${{ COMBINED_TAG }} || true
           docker rmi $REGISTRY:latest || true
