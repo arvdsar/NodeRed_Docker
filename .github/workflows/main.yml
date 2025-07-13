@@ -6,7 +6,7 @@ on:
       version:
         description: 'NodeRed version number'
         required: true
-        default: 'vx.x.x'
+        default: vx.x.x
 
 env:
   REGISTRY: mrmadalex/my_new_nodered
