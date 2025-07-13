@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: mrmadalex/my_new_nodered
-  BUILD_NUMBER_OFFSET: 51
+  BUILD_NUMBER_OFFSET: 55
 
 
 jobs:
