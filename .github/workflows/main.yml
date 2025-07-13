@@ -38,18 +38,18 @@ jobs:
         run: echo "COMBINED_TAG=${BUILD_NUMBER}-${{ github.event.inputs.version }}" >> $GITHUB_ENV
 
       - name: Build Docker image with run number tag
-        run: docker build -t $REGISTRY:${{ COMBINED_TAG }} .
+        run: docker build -t $REGISTRY:${COMBINED_TAG} .
 
       - name: Build Docker image with latest tag
         run: docker build -t $REGISTRY:latest .
 
       - name: Push Docker image with run number tag
-        run: docker push $REGISTRY:${{ COMBINED_TAG }}
+        run: docker push $REGISTRY:${COMBINED_TAG}
 
       - name: Push Docker image with latest tag
         run: docker push $REGISTRY:latest
 
       - name: Remove local images
         run: |
-          docker rmi $REGISTRY:${{ COMBINED_TAG }} || true
+          docker rmi $REGISTRY:${COMBINED_TAG} || true
           docker rmi $REGISTRY:latest || true
