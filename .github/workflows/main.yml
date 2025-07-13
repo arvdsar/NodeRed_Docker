@@ -6,7 +6,7 @@ on:
       version:
         description: 'NodeRed version number'
         required: true
-        default: vx.x.x
+        default: 'vx.x.x'
 
 env:
   REGISTRY: mrmadalex/my_new_nodered
@@ -34,7 +34,7 @@ jobs:
         run: echo "BUILD_NUMBER=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))" >> $GITHUB_ENV
      
       - name: Create combined tag
-        run: echo "COMBINED_TAG=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER )}-${{ github.event.inputs.version }}" >> $GITHUB_ENV
+        run: echo "COMBINED_TAG=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))-${{ github.event.inputs.version }}" >> $GITHUB_ENV
 
 
       - name: Build Docker image with run number tag
