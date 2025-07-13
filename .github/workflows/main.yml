@@ -30,10 +30,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Calculate build and combined tag
-        run: |
-          echo "BUILD_NUMBER=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))" >> $GITHUB_ENV
-          echo "COMBINED_TAG=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER )}-${{ github.event.inputs.version }}" >> $GITHUB_ENV
+      - name: Calculate build tag
+        run: echo "BUILD_NUMBER=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER ))" >> $GITHUB_ENV
+     
+      - name: Create combined tag
+        run: echo "COMBINED_TAG=$(( $BUILD_NUMBER_OFFSET + $GITHUB_RUN_NUMBER )}-${{ github.event.inputs.version }}" >> $GITHUB_ENV
 
 
       - name: Build Docker image with run number tag
