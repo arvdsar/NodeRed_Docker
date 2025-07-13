@@ -11,9 +11,7 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    container:
-      image: nodered/node-red:latest
-      options: --user root
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
